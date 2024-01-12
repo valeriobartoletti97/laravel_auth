@@ -23,6 +23,7 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'name'=> ['required', 'string', 'max:100', 'min:3'],
+            'language'=>['required', 'string', 'max:50'],
         ];
     }
 
@@ -32,6 +33,8 @@ class StoreProjectRequest extends FormRequest
             'name.required' => 'The name field is required.',
             'name.min' => 'The name must be at least :min characters.',
             'name.max' => 'The name may not be greater than :max characters.',
+            'language.required' => 'The language field is required.',
+            'language.max' => 'The language may not be greater than :max characters.',
         ];
     }
 }
