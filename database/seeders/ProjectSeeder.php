@@ -25,7 +25,6 @@ class ProjectSeeder extends Seeder
             $new_project->slug = Str::slug($project['name'].'-'.$project['language']);
             $new_project->url = $project['url'];
             $new_project->created = $project['created'];
-            $new_project->updated = $project['updated'];
             $new_project->commits = $project['commits'];
             $new_project->save();
         };

@@ -11,7 +11,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=> ['required', 'string', 'max:100', 'min:3'],
+        ];
+    }
+
+    public function messages(){
+
+        return [
+            'name.required' => 'The name field is required.',
+            'name.min' => 'The name must be at least :min characters.',
+            'name.max' => 'The name may not be greater than :max characters.',
         ];
     }
 }

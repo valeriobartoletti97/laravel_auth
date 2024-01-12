@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('slug', 255)->unique();
             $table->string('url',200)->nullable();
             $table->date('created');
-            $table->date('updated');
             $table->unsignedSmallInteger('commits');
             $table->timestamps();
         });

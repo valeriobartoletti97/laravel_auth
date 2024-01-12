@@ -7,6 +7,8 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 
+use illuminate\Support\Str;
+
 class ProjectController extends Controller
 {
     /**
@@ -25,6 +27,7 @@ class ProjectController extends Controller
     public function create()
     {
         //
+        return view('admin.projects.create');
     }
 
     /**
@@ -32,7 +35,20 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $slug= Str::slug($data['name'].'-'.$data['language']);
+        $data['slug'] = $slug;
+
+        $created =date('Y-m-d');
+        $data['created'] = $created;
+
+        $data['commits'] = 0;
+
+        $data['user_id'] = auth()->id();
+        
+        $project = Project::create($data);
+        return to_route('admin.projects.index');
     }
 
     /**
@@ -50,6 +66,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**

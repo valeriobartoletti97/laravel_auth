@@ -12,7 +12,6 @@ dd($projects)
                         <th scope="col">Language</th>
                         <th scope="col">Commits</th>
                         <th scope="col">Created</th>
-                        <th scope="col">Updated</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -27,7 +26,6 @@ dd($projects)
                             <td>{{ $project->language }}</td>
                             <td>{{ $project->commits }}</td>
                             <td>{{ $project->created }}</td>
-                            <td>{{ $project->updated }}</td>
                             <td>
                                 <button type="button" class="btn btn-light border border-secondary">
                                     <a href="{{route('admin.projects.show', $project->id)}}">
@@ -47,6 +45,13 @@ dd($projects)
                     @endforeach
                 </tbody>
             </table>
+            <div class="container mt-2 pb-5 d-flex justify-content-center align-content-center">
+                <a href="{{route('admin.projects.create')}}">
+                    <button class="btn btn-primary text-uppercase">
+                        Add new Project
+                    </button>
+                </a>
+            </div>
         </div>
     </section>
 @endsection
