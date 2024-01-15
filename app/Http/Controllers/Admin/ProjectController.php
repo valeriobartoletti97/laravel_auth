@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 use illuminate\Support\Str;
 
@@ -46,6 +47,11 @@ class ProjectController extends Controller
         $data['commits'] = 0;
 
         $data['user_id'] = auth()->id();
+
+        if($request->hasFile('image')){
+            $img_path= Storage::put('images', $request->image);
+            $data['image'] = $img_path;
+        } 
         
         $project = Project::create($data);
         return to_route('admin.projects.index');
@@ -75,6 +81,13 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         //
+        /* if($request->hasFile('image')){
+            if($project->image){
+                Storage::delete($post->image);
+            }
+            $img_path= Storage::put('images', $request->image);
+            $data['image'] = $img_path;
+        } */
     }
 
     /**
@@ -83,5 +96,10 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+        /* if($project->image){
+            Storage::delete($post->image);
+        } */
+        $project->delete();
+        return to_route('admin.projects.index')->with('message', "$project->name successfully deleted");
     }
 }

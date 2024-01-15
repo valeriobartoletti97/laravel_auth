@@ -24,6 +24,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'name'=> ['required', 'string', 'max:100', 'min:3'],
             'language'=>['required', 'string', 'max:50'],
+            'image' =>['nullable', 'image'] 
         ];
     }
 
@@ -35,6 +36,7 @@ class StoreProjectRequest extends FormRequest
             'name.max' => 'The name may not be greater than :max characters.',
             'language.required' => 'The language field is required.',
             'language.max' => 'The language may not be greater than :max characters.',
+            'image.max' => 'The image may not be greater than :max characters.',
         ];
     }
 }

@@ -190,6 +190,24 @@ php artisan make:model Nome -rcms --requests
 	
 php artisan make:request StoreMomemodelRequest
 
+#file storage
+
+#apro config\fylesistem e inserisco
+
+'default' => env('FILESYSTEM_DISK', 'public'),
+
+#apro file env
+
+FILESYSTEM_DISK=public
+
+#digito comando
+
+php artisan storage:link
+
+#in tutti i form che hanno caselle di upload dei file inserisco nel tag form
+
+enctype="multipart/form-data"
+
 
 ```
 ## Auth

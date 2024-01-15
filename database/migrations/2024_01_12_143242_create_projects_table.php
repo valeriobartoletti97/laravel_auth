@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('url',200)->nullable();
             $table->date('created');
             $table->unsignedSmallInteger('commits');
+            $table->string('image',300)->nullable();
             $table->timestamps();
         });
     }

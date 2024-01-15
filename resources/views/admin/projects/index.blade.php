@@ -37,9 +37,13 @@ dd($projects)
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                 </button>
-                                <button type="button" class="btn btn-light border border-secondary">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
+                                <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-light border border-secondary">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
