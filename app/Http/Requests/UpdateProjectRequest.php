@@ -24,7 +24,9 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'name'=> ['required', 'string', 'max:100', 'min:3'], Rule::unique('posts')->ignore($this->project),
-            /* 'image' =>['nullable', 'image'] */
+            'image' =>['nullable', 'image'],
+            'language'=>['required', 'string', 'max:50'],
+            'url' =>['nullable', 'url','max:2048']
         ];
     }
 
@@ -34,6 +36,10 @@ class UpdateProjectRequest extends FormRequest
             'name.required' => 'The name field is required.',
             'name.min' => 'The name must be at least :min characters.',
             'name.max' => 'The name may not be greater than :max characters.',
+            'language.required' => 'The language field is required.',
+            'language.max' => 'The language may not be greater than :max characters.',
+            'image.max' => 'The image may not be greater than :max characters.',
+            'url.max' => 'The url may not be greater than :max characters.',
         ];
     }
 }

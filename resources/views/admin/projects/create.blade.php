@@ -25,6 +25,17 @@
                 <input type="url" name="url" id="url" class="form-control"
                     @error('name') is-invalid @enderror>
             </div>
+            <div class="d-flex mb-3 align-items-end">
+                <div class="me-1">
+                    <img id="uploadPreview" width="200" src="https://via.placeholder.com/300x200">
+                </div>
+                <div class="">
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" value="{{old('image')}}">
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                </div>
+            </div>
             @error('url')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

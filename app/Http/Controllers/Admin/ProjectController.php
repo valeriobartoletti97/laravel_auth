@@ -54,7 +54,7 @@ class ProjectController extends Controller
         } 
         
         $project = Project::create($data);
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.show', $project->id);
     }
 
     /**
@@ -81,13 +81,24 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         //
-        /* if($request->hasFile('image')){
+        $data = $request->validated();
+
+        if($project->name!==$data['name']){
+            $slug= Str::slug($data['name'].'-'.$data['language']);
+        }
+        $data['slug'] = $slug;
+
+        $data['user_id'] = auth()->id();
+        if($request->hasFile('image')){
             if($project->image){
-                Storage::delete($post->image);
+                Storage::delete($project->image);
             }
             $img_path= Storage::put('images', $request->image);
             $data['image'] = $img_path;
-        } */
+        }
+        
+        $project->update($data);
+        return to_route('admin.projects.show', $project->id);
     }
 
     /**
@@ -96,9 +107,9 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
-        /* if($project->image){
-            Storage::delete($post->image);
-        } */
+        if($project->image){
+            Storage::delete($project->image);
+        } 
         $project->delete();
         return to_route('admin.projects.index')->with('message', "$project->name successfully deleted");
     }
